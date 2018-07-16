@@ -32,11 +32,9 @@ for username in words.read( ).split( ):
     try:
         client = session.get( 'https://www.instagram.com/accounts/web_create_ajax/attempt/' )
 
-        csrftoken = client.cookies[ 'csrftoken' ] 
-        referred_url = 'https://www.instagram.com/'
         header_data = {
-                'x-csrftoken': csrftoken, 
-                'referer': referred_url
+                'x-csrftoken': client.cookies[ 'csrftoken' ], 
+                'referer': 'https://www.instagram.com/'
         }
 
         post_data = {        
