@@ -1,4 +1,4 @@
-<p align="center"><img width="852" height="192" src="http://i.lelo.design/hades_output.png"></p>
+<p align="center"><img width="996" height="193" src="http://i.lelo.design/hades_output.png"></p>
 
 # hades
 a python script that checks the availability of instagram usernames, albeit proxyless.
