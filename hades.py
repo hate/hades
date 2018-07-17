@@ -73,6 +73,6 @@ for username in words.read( ).split( ):
 
 words.close( )
 
-print( Fore.LIGHTRED_EX + '[' + datetime.now( ).strftime( '%I:%M:%S' ) + '] ' + Fore.LIGHTCYAN_EX + '\nfinished checking! check output.txt' )
+print( Fore.LIGHTRED_EX + '\n[' + datetime.now( ).strftime( '%I:%M:%S' ) + '] ' + Fore.LIGHTCYAN_EX + 'finished checking! check output.txt' )
 time.sleep( 3 )
 exit( )
