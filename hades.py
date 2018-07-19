@@ -1,10 +1,9 @@
 ___author___ = 'xyph'
 
-import time
+from time import sleep
 from datetime import datetime
 
 import requests
-from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
 from os import system
@@ -23,7 +22,7 @@ try:
     print( Fore.LIGHTRED_EX + '\n[' + datetime.now( ).strftime( '%I:%M:%S' ) + '] ' + Fore.LIGHTCYAN_EX + 'found words.txt!\n' )
 except FileNotFoundError:
     print( Fore.LIGHTRED_EX + '[' + datetime.now( ).strftime( '%I:%M:%S' ) + '] ' + Fore.LIGHTYELLOW_EX + 'could not locate words.txt, make sure it exists!' )
-    time.sleep( 5 )
+    sleep( 5 )
     exit( )
 
 session = requests.Session( )
@@ -32,15 +31,15 @@ retries = Retry( total = 10,
                  status_forcelist = [ 500, 502, 503, 504 ],
                  raise_on_status = False
 )
-session.mount( 'https://', HTTPAdapter( max_retries = retries ) )
+session.mount( 'https://', requests.adapters.HTTPAdapter( max_retries = retries ) )
 
 for username in words.read( ).split( ):
     try:
         client = session.get( 'https://www.instagram.com/accounts/web_create_ajax/attempt/' )
 
         if client.status_code == 429: # too many requests
-            print( Fore.LIGHTRED_EX + '[' + datetime.now( ).strftime( '%I:%M:%S' ) + '] ' + Fore.RED + 'limit reached, waiting 2.5 minutes...' )
-            time.sleep( 155 ) # blah blah five seconds over blah bootleg fix blah
+            print( Fore.LIGHTRED_EX + '[' + datetime.now( ).strftime( '%I:%M:%S' ) + '] ' + Fore.RED + 'limit reached, waiting 3 minutes...' )
+            sleep( 180 ) # blah blah bootleg fix blah
 
         header_data = {
                 'x-csrftoken': client.cookies[ 'csrftoken' ],
@@ -74,5 +73,5 @@ for username in words.read( ).split( ):
 words.close( )
 
 print( Fore.LIGHTRED_EX + '\n[' + datetime.now( ).strftime( '%I:%M:%S' ) + '] ' + Fore.LIGHTCYAN_EX + 'finished checking! check output.txt' )
-time.sleep( 3 )
+sleep( 3 )
 exit( )
